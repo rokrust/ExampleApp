@@ -14,7 +14,7 @@ export default class MainPage extends Component {
                     </Text>
                 <Content />
                     <FooterBar footerBarButtons={footerBarButtons}/>
-                </Container>
+            </Container>
         );
     }
 }
@@ -23,7 +23,7 @@ export default class MainPage extends Component {
 export class FooterBar extends Component {
     constructor(props) {
         super(props);
-        this.unrollFooterButtonObject = this.unrollFooterButtonObject.bind(this);
+        //this.unrollFooterButtonObject = this.unrollFooterButtonObject.bind(this);
     }
 
     //Loop through footerButtons object and return a list of buttons
@@ -62,9 +62,8 @@ class FooterButton extends Component {
     render() {
         return(
             <Button onPress={this.props.callback}>
-                <Icon iconName={this.props.iconName} />
+                <Icon name={this.props.iconName} />
                 {console.log(<Icon iconName={this.props.iconName} />)}
-
             </Button>
         )
     }
