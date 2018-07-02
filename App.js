@@ -11,7 +11,8 @@ import {
   Text,
   View
 } from 'react-native';
-import { FooterBar } from './Components/MainPage'
+import { Container, Header, Content, Button, FlatList } from 'native-base';
+import MainPage from './Components/MainPage'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,9 +25,7 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View>
-        <FooterBar />
-      </View>
+      <MainPage />
       /*<View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome, my dude
