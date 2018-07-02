@@ -63,6 +63,8 @@ class FooterButton extends Component {
         return(
             <Button onPress={this.props.callback}>
                 <Icon iconName={this.props.iconName} />
+                {console.log(<Icon iconName={this.props.iconName} />)}
+
             </Button>
         )
     }
