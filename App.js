@@ -11,7 +11,6 @@ import {
   Text,
   View
 } from 'react-native';
-import { Container, Header, Content, Button, FlatList } from 'native-base';
 import MainPage from './Components/MainPage'
 
 const instructions = Platform.select({

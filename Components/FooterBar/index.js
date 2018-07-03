@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 
 import { View, Text, Image } from 'react-native'
-import { Footer, FooterTab, Button, Icon } from 'native-base'
+import { Footer, FooterTab, Button, Icon, StyleProvider } from 'native-base'
 import { DebugTextOutput } from '../../Debug'
+import { IconButton } from '../IconButton'
 
 //The lower footer bar of the main page for calling, uploading images etc..
 export default class FooterBar extends Component {
@@ -15,10 +16,11 @@ export default class FooterBar extends Component {
     unrollFooterButtonObject(footerBarButtons){
         return (
             footerBarButtons.map(button => 
-                <FooterButton 
+                <IconButton
                     key={button.id}
-                    iconName={button.iconName} 
-                    callback={button.callback}
+                    type={button.iconName} 
+                    onPress={button.callback}
+                    style={button.style}
                 />
             )
         );
@@ -47,8 +49,8 @@ class FooterButton extends Component {
 
     render() {
         return(
-            <Button onPress={this.props.callback}>
-                <Icon name={this.props.iconName} />
+            <Button onPress={this.props.callback} style={this.props.style.button}>
+                <Icon name={this.props.iconName} style={this.props.style.icon}/>
             </Button>
         )
     }
