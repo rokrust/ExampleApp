@@ -11,7 +11,8 @@ import {
   Text,
   View
 } from 'react-native';
-import MainPage from './Components/Scenes/MainPage'
+import HomeScreen from './Scenes/MainPage'
+import Main from './Navigation/Main'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,22 +25,9 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <MainPage />
-      /*<View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome, my dude
-        </Text>
-        <Text style={styles.instructions}>
-          The day is Wednesday.
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
-          <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
-        </View>
-      </View>*/
+      <View>
+        <Main />
+      </View>
     );
   }
 }

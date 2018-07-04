@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
-import FooterBar from '../../Components/FooterBar'
+import React, { Component } from 'react'
+import { View, Dimensions } from 'react-native'
 
 const buttonColor = '#F8F8F8';
 const footerBarButtons = [
@@ -15,15 +14,17 @@ const footerBarButtons = [
         color: buttonColor
     },
     {
-        iconName: "slideshow",
-        callback: () => console.log("navigate"),
+        iconName: "cast green",
+        callback: () => this.props.navigation.navigate("SlideShow", {}),
         color: buttonColor
     }
 ];
 
-export default class HomeScreen extends Component {
+
+
+export default class SlideShowScreen extends Component {
     static navigationOptions = {
-        title: 'Home',
+        title: 'SlideShow',
     };
 
     render() {
