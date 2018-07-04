@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
-import FooterBar from '../FooterBar'
-import { DebugTextOutput } from '../../Debug'
-
+import FooterBar from '../../FooterBar'
 
 const buttonColor = '#F8F8F8';
 const footerBarButtons = [

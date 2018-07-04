@@ -42,7 +42,6 @@ export default class IconButton extends Component  {
   }
 
   render() {
-    console.log("Iconbutton size: (" + this.props.size.width + ", " + this.props.size.height + ")")
     return (
       <Button
         size={this.props.size}
