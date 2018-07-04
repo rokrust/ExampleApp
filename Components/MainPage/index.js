@@ -1,58 +1,36 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
-import { Container, Header, Content } from 'native-base'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import FooterBar from '../FooterBar'
 import { DebugTextOutput } from '../../Debug'
 
 
-const style = StyleSheet.create({
-    button: {
-        backgroundColor: '#F8F8F8',
-    },
-    icon: {
-        color: '#626366',
-    }
-});
-
+const buttonColor = '#F8F8F8';
 const footerBarButtons = [
     {   
-        id: 0,
-        iconName: "cog",
+        iconName: "cast",
         callback: () => console.log("cog"),
-        style: style
+        color: buttonColor
     },
     {
-        id: 1,
-        iconName: "camera",
+        iconName: "mirror",
         callback: () => console.log("camera"),
-        style: style
+        color: buttonColor
     },
     {
-        id: 2,
-        iconName: "navigate",
+        iconName: "slideshow",
         callback: () => console.log("navigate"),
-        style: style
-    },
-    {
-        id: 3,
-        iconName: "person",
-        callback: () => console.log("person"),
-        style: style
+        color: buttonColor
     }
 ];
 
 export default class MainPage extends Component {
 
     render() {
+        let dim = Dimensions.get('window')
         return (
-            <Container>
-                <Header />
-                    <Text>
-                        Welcome, my dude
-                    </Text>
-                <Content />
-                    <FooterBar footerBarButtons={footerBarButtons}/>
-            </Container>
+            <View style={{flex: 1}}>
+                <FooterBar footerBarButtons={footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
+            </View>
         );
     }
 }

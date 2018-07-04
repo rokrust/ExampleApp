@@ -1,57 +1,59 @@
 import React, { Component, PropTypes } from 'react'
+import { View, Dimensions } from 'react-native'
+import styled from 'styled-components'
 
-import { View, Text, Image } from 'react-native'
-import { Footer, FooterTab, Button, Icon, StyleProvider } from 'native-base'
-import { DebugTextOutput } from '../../Debug'
-import { IconButton } from '../IconButton'
+import IconButton from '../IconButton'
 
 //The lower footer bar of the main page for calling, uploading images etc..
 export default class FooterBar extends Component {
     constructor(props) {
         super(props);
-        //this.unrollFooterButtonObject = this.unrollFooterButtonObject.bind(this);
     }
-
-    //Loop through footerButtons object and return a list of buttons
-    unrollFooterButtonObject(footerBarButtons){
-        return (
-            footerBarButtons.map(button => 
-                <IconButton
-                    key={button.id}
-                    type={button.iconName} 
-                    onPress={button.callback}
-                    style={button.style}
-                />
-            )
-        );
-    }
-
+   
     //Renders all the buttons of the footer bar
     render() {
+        let i = 0;
+        
+        //Buttons are of equal size
+        let buttonSize = {
+            width: this.props.footerSize.width / this.props.footerBarButtons.length,
+            height: this.props.footerSize.height
+        }
+        console.log(this.props.footerBarButtons)
+        
         return(
-            <Footer>
-                <FooterTab>    
-                    {this.unrollFooterButtonObject(this.props.footerBarButtons)}
-                </FooterTab>
+            //Moves footer to the bottom of the screen
+            //Loop through footerButtons object and return a list of buttons
+            <Footer size={this.props.footerSize}>{
+                this.props.footerBarButtons.map(button => 
+                    <IconButton
+                        key={i++}
+                        type={button.iconName} 
+                        onPress={button.callback}
+                        size={buttonSize}
+                        bgColor={button.color}
+                    />
+                )
+            }
             </Footer>
         );
-        
     }
 };
 
-//Generic button for the FooterBar
-//Props:    iconName: Button image source
-//          callback: Callback function
-class FooterButton extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return(
-            <Button onPress={this.props.callback} style={this.props.style.button}>
-                <Icon name={this.props.iconName} style={this.props.style.icon}/>
-            </Button>
-        )
-    }
-};
+//flex-direction: row
+const Footer = styled.View`
+    width: ${props => props.size.width};
+    height: ${props => props.size.height};
+    flex: 1;
+    flex-direction: row
+    position: absolute;
+    bottom: 0;
+    left: 0;
+`;
+/*
+const Buttons = Animated.createAnimatedComponent(styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+`);
+*/

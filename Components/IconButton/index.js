@@ -13,20 +13,23 @@ const icons = {
   delete: require('./img/delete.png'),
   settings: require('./img/settings.png'),
   edit: require('./img/edit.png'),
+  cast: require('./img/cast.png'),
+  mirror: require('./img/mirror.png'),
+  slideshow: require('./img/slideshow.png')
 };
 
 export default class IconButton extends Component  {
   static propTypes = {
     onPress: PropTypes.func.isRequired,
     type: PropTypes.oneOf(Object.keys(icons)).isRequired,
-    size: PropTypes.number,
+    size: PropTypes.object,
     bgColor: PropTypes.string,
     accessibilityLabel: PropTypes.string,
     testID: PropTypes.string
   };
 
   static defaultProps = {
-    size: 53,
+    size: {width: 53, height: 70},
     bgColor: 'white'
   };
 
@@ -39,6 +42,7 @@ export default class IconButton extends Component  {
   }
 
   render() {
+    console.log("Iconbutton size: (" + this.props.size.width + ", " + this.props.size.height + ")")
     return (
       <Button
         size={this.props.size}
@@ -67,15 +71,14 @@ export default class IconButton extends Component  {
 }
 
 const Button = styled.TouchableOpacity`
-  width: ${props => (props.size + 12)};
-  height: ${props => props.size};
+  width: ${props => props.size.width};
+  height: ${props => props.size.height};
 `;
 
 const Wrapper = styled.View`
   background-color: ${props => props.bgColor};
-  width: ${props => props.size};
-  height: ${props => props.size};
-  border-radius: ${props => props.size};
+  width: ${props => props.size.width};
+  height: ${props => props.size.height};
   align-items: center;
   justify-content: center;
 `;
