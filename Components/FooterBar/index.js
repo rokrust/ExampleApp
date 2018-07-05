@@ -7,11 +7,20 @@ import IconButton from '../IconButton'
 //The lower footer bar of the main page for calling, uploading images etc..
 export default class FooterBar extends Component {
     constructor(props) {
+        console.log("Constructing footerbar")
         super(props);
+        this.props.footerBarButtons.forEach(
+            (button, index) => {
+                this.props.footerBarButtons[index].callback = 
+                button.callback.bind(this)
+            }
+        )
+        console.log("Footerbar constructed")
     }
    
     //Renders all the buttons of the footer bar
     render() {
+        console.log("Rendering footerbar")
         let i = 0;
         
         //Buttons are of equal size
@@ -19,7 +28,6 @@ export default class FooterBar extends Component {
             width: this.props.footerSize.width / this.props.footerBarButtons.length,
             height: this.props.footerSize.height
         }
-        console.log(this.props.footerBarButtons)
         
         return(
             //Moves footer to the bottom of the screen
@@ -50,10 +58,3 @@ const Footer = styled.View`
     bottom: 0;
     left: 0;
 `;
-/*
-const Buttons = Animated.createAnimatedComponent(styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-around;
-`);
-*/

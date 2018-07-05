@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import FooterBar from '../../Components/FooterBar'
+import { av2Theme } from '../../Themes'
 
-const buttonColor = '#F8F8F8';
+const buttonColor = av2Theme.featherGray;
 const footerBarButtons = [
     {   
         iconName: "cast",
@@ -16,7 +17,10 @@ const footerBarButtons = [
     },
     {
         iconName: "slideshow",
-        callback: () => console.log("navigate"),
+        callback: () => {
+            console.log("Callback this: " + this);
+            this.props.navigation.navigate("SlideShow", {});
+        },
         color: buttonColor
     }
 ];
@@ -28,6 +32,7 @@ export default class HomeScreen extends Component {
 
     render() {
         let dim = Dimensions.get('window')
+        console.log("Rendering main page")
         return (
             <View style={{flex: 1}}>
                 <FooterBar footerBarButtons={footerBarButtons} footerSize={{width: dim.width, height: 70}}/>

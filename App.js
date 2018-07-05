@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 import HomeScreen from './Scenes/MainPage'
-import Main from './Navigation/Main'
+import MainNavigation from './Navigation/Main'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -25,9 +25,7 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View>
-        <Main />
-      </View>
+        <HomeScreen />
     );
   }
 }

@@ -15,7 +15,7 @@ const footerBarButtons = [
     },
     {
         iconName: "cast green",
-        callback: () => this.props.navigation.navigate("SlideShow", {}),
+        callback: () => console.log("slide show"),
         color: buttonColor
     }
 ];

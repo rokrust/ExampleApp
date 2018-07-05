@@ -1,19 +1,15 @@
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import HomeScreen from "../Scenes/MainPage"
 import SlideShowScreen from "../Scenes/Slideshow"
-const MainNavigation = StackNavigator({
-    Home: {
-        screen: HomeScreen,
-    },
+const MainNavigation = createStackNavigator({
+    Home: HomeScreen,
+    SlideShow: SlideShowScreen
     /*Call: {
         screen: Call
     },
     CameraRoll: {
 
     },*/
-    SlideShow : {
-        screen: SlideShowScreen
-    }
 }, {
     initialRouteName: 'Home', 
     navigationOptions: {
