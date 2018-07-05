@@ -9,12 +9,6 @@ export default class FooterBar extends Component {
     constructor(props) {
         console.log("Constructing footerbar")
         super(props);
-        this.props.footerBarButtons.forEach(
-            (button, index) => {
-                this.props.footerBarButtons[index].callback = 
-                button.callback.bind(this)
-            }
-        )
         console.log("Footerbar constructed")
     }
    

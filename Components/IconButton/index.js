@@ -15,7 +15,8 @@ const icons = {
   edit: require('./img/edit.png'),
   cast: require('./img/cast.png'),
   mirror: require('./img/mirror.png'),
-  slideshow: require('./img/slideshow.png')
+  slideshow: require('./img/slideshow.png'),
+  castGreen: require('./img/castGreen.png')
 };
 
 export default class IconButton extends Component  {

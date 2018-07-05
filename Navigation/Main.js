@@ -1,9 +1,9 @@
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator, createTabNavigator } from 'react-navigation'
 import HomeScreen from "../Scenes/MainPage"
-import SlideShowScreen from "../Scenes/Slideshow"
-const MainNavigation = createStackNavigator({
+import CastScreen from "../Scenes/Slideshow"
+const MainNavigation = createTabNavigator({
     Home: HomeScreen,
-    SlideShow: SlideShowScreen
+    Cast: CastScreen
     /*Call: {
         screen: Call
     },

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { View, Dimensions } from 'react-native'
+import FooterBar from '../../Components/FooterBar'
+
 
 const buttonColor = '#F8F8F8';
 const footerBarButtons = [
     {   
-        iconName: "cast",
+        iconName: "castGreen",
         callback: () => console.log("cog"),
         color: buttonColor
     },
@@ -14,7 +16,7 @@ const footerBarButtons = [
         color: buttonColor
     },
     {
-        iconName: "cast green",
+        iconName: "slideshow",
         callback: () => console.log("slide show"),
         color: buttonColor
     }
@@ -22,9 +24,9 @@ const footerBarButtons = [
 
 
 
-export default class SlideShowScreen extends Component {
+export default class CastScreen extends Component {
     static navigationOptions = {
-        title: 'SlideShow',
+        title: 'Cast',
     };
 
     render() {
