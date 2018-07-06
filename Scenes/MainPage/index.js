@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import FooterBar from '../../Components/FooterBar'
 import { av2Theme } from '../../Themes'
+import ImageBrowser from '../../Container/ImageBrowser'
 
 const buttonColor = av2Theme.featherGray;
 
@@ -30,7 +31,6 @@ export default class HomeScreen extends Component {
 
     render() {
         let dim = Dimensions.get('window')
-        console.log("Rendering main page")
         return (
             <View style={{flex: 1}}>
                 <FooterBar footerBarButtons={this.footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
