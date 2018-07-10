@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Dimensions, Image } from 'react-native'
 import FooterBar from '../../Components/FooterBar'
 import ImageBrowser from '../../Container/ImageBrowser/'
+import ClickableImage from '../../Components/ClickableImage'
 
 const buttonColor = '#F8F8F8';
 const footerBarButtons = [
@@ -50,15 +51,15 @@ export default class CastScreen extends Component {
         this.setState(newState);
     }
 
+    getPhotos(nPhotos) {
+        this.state.imageBrowser.getPhotos(nPhotos)
+        .then((photos) => this.updateRenderedPhotos(photos))
+        .catch(error => {console.log(error)});
+    }
+
     //Get images from cameraRoll and rerender
     componentDidMount(){
-        this.state.imageBrowser.getPhotos(10)
-        .then((photos) => {
-            console.log("Getting images")
-            console.log(photos)
-            this.updateRenderedPhotos(photos)
-        })
-        .catch(error => console.log(error));
+        this.getPhotos(20)
     }
 
     static navigationOptions = {
@@ -69,9 +70,9 @@ export default class CastScreen extends Component {
         let dim = Dimensions.get('window')
         return (
             <View style={{flex: 1}}>
-                <Image
-                    style={{width: dim.width, height: dim.height}} 
-                    source={{uri: this.state.images[0].uri}}/>
+                <ClickableImage
+                    dim={{width: dim.width, height: dim.height}} 
+                    uri={this.state.images[0].uri}/>
                 <FooterBar footerBarButtons={footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
             </View>
         );
