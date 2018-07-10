@@ -43,7 +43,6 @@ export default class HomeScreen extends Component {
     ];
 
     updateRenderedPhotos(photos) {
-        console.log(photos)
         let newState = {
             images: photos.map({
                 uri: photos.node.image.uri,
@@ -64,7 +63,7 @@ export default class HomeScreen extends Component {
     }
 
     componentDidMount(){
-        this.getPhotos(20);
+        //this.getPhotos(20);
     }
 
     render() {

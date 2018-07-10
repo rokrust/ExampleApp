@@ -29,23 +29,36 @@ export default class CastScreen extends Component {
         super(props);
 
         this.state={
-            images: []
+            images: [{uri: ""}],
+            imageBrowser: new ImageBrowser
         };
+    }
+
+    updateRenderedPhotos(photos) {
+        let newState = {
+            images: photos.map(photo => {
+                return {
+                    uri: photo.node.image.uri,
+                    dim: {
+                        width: photo.node.image.width,
+                        height: photo.node.image.height
+                    }
+                }
+            })
+        }
+
+        this.setState(newState);
     }
 
     //Get images from cameraRoll and rerender
     componentDidMount(){
-        images = new ImageBrowser;
-        images.getPhotos(10).then((photos) => {
-            this.setState({images: {
-                    uri: photos[0].node.image.uri,
-                    dim: {
-                        width: photos[0].node.image.width,
-                        height: photos[0].node.image.height
-                    }
-                }
-            });
-        });
+        this.state.imageBrowser.getPhotos(10)
+        .then((photos) => {
+            console.log("Getting images")
+            console.log(photos)
+            this.updateRenderedPhotos(photos)
+        })
+        .catch(error => console.log(error));
     }
 
     static navigationOptions = {
@@ -58,7 +71,7 @@ export default class CastScreen extends Component {
             <View style={{flex: 1}}>
                 <Image
                     style={{width: dim.width, height: dim.height}} 
-                    source={{uri: this.state.images.uri}}/>
+                    source={{uri: this.state.images[0].uri}}/>
                 <FooterBar footerBarButtons={footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
             </View>
         );
