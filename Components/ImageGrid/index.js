@@ -23,38 +23,24 @@ export default class ImageGrid extends Component {
     }
 
     state = {
-        numColumns: 0,
         useSpacing: true,
         imageDim: 0,
     }
 
-    calculateImageDim(props){
-        this.state.imageDim = this.props.numColumns / this.props.gridSize.width;
+    calculateImageDim(){
+        this.state.imageDim = this.props.dim / this.props.numColumns;
 
-
-        if(useSpacing) {
+        if(this.props.useSpacing) {
             this.state.imageDim -= spacing; //Crop image
         }
     }
 
-    unrollPhotos() {
-        return this.props.photos.map(image => {
-            <ClickableImage 
-                dim={{width: this.state.imageDim, height: this.state.imageDim}}
-                uri={image.uri}
-                onPress={this.onPress}
-            />
-        })
-    }
+    _keyExtractor= (item, index) => item.uri;
 
-    _onPress(){
-
-    }
-
-    _renderItem = ({image}) => {
-        <ClickableImage 
+    _renderItem = image => {
+        return <ClickableImage 
             dim={{width: this.state.imageDim, height: this.state.imageDim}}
-            uri={image.uri}
+            uri={image.item.uri}
             onPress={this._onPress}
         />
     }
@@ -63,11 +49,14 @@ export default class ImageGrid extends Component {
         if (!this.props.useSpacing){
             this.spacing = 0;
         }
-        console.log("Yolo")
+        this.calculateImageDim();
+        
         return(
             <FlatList 
+                data={this.props.photos}
                 renderItem={this._renderItem}
                 numColumns={this.props.numColumns}
+                keyExtractor={this._keyExtractor}
             />
         )
     }

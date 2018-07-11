@@ -44,11 +44,13 @@ export default class HomeScreen extends Component {
 
     updateRenderedPhotos(photos) {
         let newState = {
-            images: photos.map({
-                uri: photos.node.image.uri,
-                dim: {
-                    width: photos.node.image.width,
-                    height: photos.node.image.height
+            images: photos.map(photo => {
+                return {
+                    uri: photo.node.image.uri,
+                    dim: {
+                        width: photo.node.image.width,
+                        height: photo.node.image.height
+                    }
                 }
             })
         }
@@ -63,7 +65,7 @@ export default class HomeScreen extends Component {
     }
 
     componentDidMount(){
-        //this.getPhotos(20);
+        this.getPhotos(100);
     }
 
     render() {
@@ -71,7 +73,7 @@ export default class HomeScreen extends Component {
 
         return (
             <View style={{flex: 1}}>
-                <ImageGrid photos={this.state.images} dim={dim.width} numColumns={4} />
+                <ImageGrid photos={this.state.images} dim={dim.width} numColumns={3} />
                 <FooterBar footerBarButtons={this.footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
             </View>
         );

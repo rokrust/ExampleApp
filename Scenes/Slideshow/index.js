@@ -4,6 +4,13 @@ import FooterBar from '../../Components/FooterBar'
 import ImageBrowser from '../../Container/ImageBrowser/'
 import ClickableImage from '../../Components/ClickableImage'
 
+
+/****************************
+ *  TODO
+ *      Fix rerendering issue
+ * 
+ *****************************/
+
 const buttonColor = '#F8F8F8';
 const footerBarButtons = [
     {   

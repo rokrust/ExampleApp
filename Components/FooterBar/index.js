@@ -7,14 +7,11 @@ import IconButton from '../IconButton'
 //The lower footer bar of the main page for calling, uploading images etc..
 export default class FooterBar extends Component {
     constructor(props) {
-        console.log("Constructing footerbar")
         super(props);
-        console.log("Footerbar constructed")
     }
    
     //Renders all the buttons of the footer bar
     render() {
-        console.log("Rendering footerbar")
         let i = 0;
         
         //Buttons are of equal size
