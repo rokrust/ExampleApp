@@ -13,7 +13,7 @@ export default class ImageBrowser{
     }
 
     resetPhotoIndexCursor() {
-        this.setState()
+        this.lastFetchedPhotoCursor = null;
     }
 
 };

@@ -27,6 +27,10 @@ export default class ImageGrid extends Component {
         imageDim: 0,
     }
 
+    componentDidMount(){
+        this.calculateImageDim();
+    }
+
     calculateImageDim(){
         this.state.imageDim = this.props.dim / this.props.numColumns;
 
@@ -49,7 +53,6 @@ export default class ImageGrid extends Component {
         if (!this.props.useSpacing){
             this.spacing = 0;
         }
-        this.calculateImageDim();
         
         return(
             <FlatList 
@@ -57,17 +60,10 @@ export default class ImageGrid extends Component {
                 renderItem={this._renderItem}
                 numColumns={this.props.numColumns}
                 keyExtractor={this._keyExtractor}
+                onEndReached={this.props.onEndReached}
+                onEndReachedThreshold={0.5}
+                extraData={this.state}
             />
         )
     }
 }
-
-const Grid = styled.View`
-    display: grid;
-    grid-gap: ${props => props.spacing}
-`;
-
-const GridElementWrapper = styled.View`
-    grid-row: ${props => props.row} / span 1;
-    grid-column-start: ${props => props.col} / span 1;
-`;

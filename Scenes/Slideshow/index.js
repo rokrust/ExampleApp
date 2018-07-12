@@ -74,6 +74,7 @@ export default class CastScreen extends Component {
     };
 
     render() {
+        console.log("Rendering")
         let dim = Dimensions.get('window')
         return (
             <View style={{flex: 1}}>

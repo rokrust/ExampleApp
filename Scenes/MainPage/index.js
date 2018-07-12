@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
+import throttle from 'lodash.throttle'
+
 import FooterBar from '../../Components/FooterBar'
 import { av2Theme } from '../../Themes'
 import ImageBrowser from '../../Container/ImageBrowser'
@@ -14,13 +16,7 @@ export default class HomeScreen extends Component {
     }
     
     state={
-        images: [{
-            uri: "",
-            dim: {
-                width: 0,
-                height: 0 
-            }
-        }],
+        images: [],
         imageBrowser: new ImageBrowser
     }
 
@@ -43,26 +39,30 @@ export default class HomeScreen extends Component {
     ];
 
     updateRenderedPhotos(photos) {
-        let newState = {
-            images: photos.map(photo => {
-                return {
-                    uri: photo.node.image.uri,
-                    dim: {
-                        width: photo.node.image.width,
-                        height: photo.node.image.height
-                    }
+        //Extract useful information from the photos array
+        let newImages = photos.map(photo => {
+            return {
+                uri: photo.node.image.uri,
+                dim: {
+                    width: photo.node.image.width,
+                    height: photo.node.image.height
                 }
-            })
-        }
+            }
+        })
 
-        this.setState(newState);
+        //Append the new images to the images stored in state
+        this.setState({images: this.state.images.concat(newImages)});
     }
 
-    getPhotos(nPhotos) {
+    getPhotos= throttle((nPhotos) => {
+        console.log("Getting photos")
         this.state.imageBrowser.getPhotos(nPhotos)
-        .then((photos) => this.updateRenderedPhotos(photos))
+        .then((photos) => {
+            this.updateRenderedPhotos(photos); 
+            console.log("New photos picked up")
+        })
         .catch(error => {console.log(error)});
-    }
+    }, 300,  { leading: true, trailing: false })
 
     componentDidMount(){
         this.getPhotos(100);
@@ -73,8 +73,16 @@ export default class HomeScreen extends Component {
 
         return (
             <View style={{flex: 1}}>
-                <ImageGrid photos={this.state.images} dim={dim.width} numColumns={3} />
-                <FooterBar footerBarButtons={this.footerBarButtons} footerSize={{width: dim.width, height: 70}}/>
+                <ImageGrid 
+                    photos={this.state.images} 
+                    dim={dim.width} 
+                    numColumns={3} 
+                    onEndReached={this.getPhotos(50)}
+                />
+                <FooterBar 
+                    footerBarButtons={this.footerBarButtons} 
+                    footerSize={{width: dim.width, height: 70}}
+                />
             </View>
         );
     }
