@@ -1,23 +1,27 @@
+import React from 'react'
 import { createStackNavigator, createTabNavigator } from 'react-navigation'
 import HomeScreen from "../Scenes/MainPage"
-import CastScreen from "../Scenes/Slideshow"
+import SlideShowScreen from "../Scenes/Slideshow"
 import CameraRoll from "../Scenes/CameraRoll"
+import CastScreen from "../Scenes/CastScreen"
+import Header from "../Components/Header"
+import {av2Theme} from "../Themes"
 
-const MainNavigation = createTabNavigator({
+const MainNavigation = createStackNavigator({
     Home: HomeScreen,
+    SlideShow: SlideShowScreen,
     Cast: CastScreen,
-    /*Call: */
     CameraRoll: CameraRoll
 }, {
     initialRouteName: 'Home', 
     navigationOptions: {
         headerStyle: {
-            backgroundColor: "white", //theme.white,
+            backgroundColor: av2Theme.white,
           },
-          headerTintColor: "black",//theme.black,
+          headerTintColor: av2Theme.black,
         },
     cardStyle: {
-        backgroundColor: "white",//theme.white,
+        backgroundColor: av2Theme.white,
     },
 })
 

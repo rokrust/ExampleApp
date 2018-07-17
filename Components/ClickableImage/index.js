@@ -9,6 +9,14 @@ export default class ClickableImage extends Component {
         onPress: PropTypes.func
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        //let dim_neq =   this.props.dim.width !== nextProps.dim.width && 
+        //                this.props.dim.height !== nextProps.dim.height;
+        let uri_neq =   this.props.uri !== nextProps.uri
+
+        return this.props.dim !== nextProps;
+    }
+
     render() {
         return (
             <TouchableOpacity onPress={this.props.onPress}>

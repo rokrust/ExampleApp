@@ -6,19 +6,34 @@ import FooterBar from '../../Components/FooterBar'
 import { av2Theme } from '../../Themes'
 import ImageBrowser from '../../Container/ImageBrowser'
 import ImageGrid from '../../Components/ImageGrid'
-
+import Header from '../../Components/Header'
 
 const buttonColor = av2Theme.featherGray;
 
-export default class CameraRoll extends Component {
-    static navigationOptions = {
-        title: 'CameraRoll',
+export default class CameraRoll extends Component {    
+    static navigationOptions = ({ navigation }) => {
+        const onPressLeft = navigation.getParam('onPressLeft')
+        const onPressRight = navigation.getParam('onPressRight')
+        
+        return {
+            title: 'CameraRoll',
+            header: <Header 
+                        onPressLeft={() => onPressLeft()} 
+                        onPressRight={() => onPressRight()}
+                    />,
+        };
     }
     
-    state={
-        images: [],
-        imageBrowser: new ImageBrowser
+    constructor(props){
+        super(props);
+        this.state={
+            images: [],
+            imageBrowser: new ImageBrowser,
+            slideShow: []
+        }
     }
+
+
 
     footerBarButtons = [
         {   
@@ -38,6 +53,7 @@ export default class CameraRoll extends Component {
         }
     ];
 
+
     updateRenderedPhotos(photos) {
         //Extract useful information from the photos array
         let newImages = photos.map(photo => {
@@ -55,17 +71,28 @@ export default class CameraRoll extends Component {
     }
 
     getPhotos= throttle((nPhotos) => {
-        console.log("Getting photos")
         this.state.imageBrowser.getPhotos(nPhotos)
         .then((photos) => {
             this.updateRenderedPhotos(photos); 
-            console.log("New photos picked up")
         })
         .catch(error => {console.log(error)});
     }, 300,  { leading: true, trailing: false })
 
+    uploadSlideShow = () => {
+        this.props.navigation.navigate("SlideShow", {slideShow: this.state.slideShow})
+    }
+
     componentDidMount(){
+        this.props.navigation.setParams({onPressRight: () => this.uploadSlideShow()})
         this.getPhotos(100);
+    }
+
+    onImagePressed = uri => {
+        this.setState(prevState => {
+            {
+                slideshow: prevState.slideShow.push(uri)
+            }
+        })
     }
 
     render() {
@@ -77,7 +104,8 @@ export default class CameraRoll extends Component {
                     photos={this.state.images} 
                     dim={dim.width} 
                     numColumns={3} 
-                    onEndReached={this.getPhotos(50)}
+                    onEndReached={() => this.getPhotos(50)}
+                    onPress={this.onImagePressed}
                 />
                 <FooterBar 
                     footerBarButtons={this.footerBarButtons} 

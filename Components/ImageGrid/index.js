@@ -10,7 +10,7 @@ import styled from 'styled-components'
 //      - image URI's
 //  - An object with grid dimensions
 //  - An object with grid size
-export default class ImageGrid extends Component {
+export default class ImageGrid extends React.PureComponent {
     static propTypes = {
         photos: PropTypes.array.isRequired,
         numColumns: PropTypes.number.isRequired,
@@ -39,13 +39,13 @@ export default class ImageGrid extends Component {
         }
     }
 
-    _keyExtractor= (item, index) => item.uri;
+    _keyExtractor= (item, index) => {return item.uri};
 
     _renderItem = image => {
         return <ClickableImage 
             dim={{width: this.state.imageDim, height: this.state.imageDim}}
             uri={image.item.uri}
-            onPress={this._onPress}
+            onPress={()=>this.props.onPress(image.item.uri)}
         />
     }
 
